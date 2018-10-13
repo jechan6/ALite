@@ -1,0 +1,1 @@
+json.extract! @vehicle, :id, :views_count
