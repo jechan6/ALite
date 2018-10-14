@@ -1,4 +1,4 @@
 class Vehicle < ApplicationRecord
-    validates :views_count, presence: true
+    validates :views_count, :VIN, presence: true
 
 end 

@@ -2,6 +2,7 @@ class Api::VehicleController < ApplicationController
 
     def create 
         @vehicle = Vehicle.new(vehicle_params)
+        @vehicle.views_count = 1
         if @vehicle.save
             render :show
         else 
@@ -10,8 +11,14 @@ class Api::VehicleController < ApplicationController
     end 
 
     def show
-        @vehicle = Vehicle.find(params[:id])
-        render :show
+        @vehicle = Vehicle.find_by(VIN: params[:id])
+        if @vehicle
+            @vehicle.increment!(:views_count)
+            render :show
+        else 
+            # raise "Error"
+            render json: ["Vehicle not found"], status: 404
+        end 
     end 
 
     def update
@@ -25,6 +32,6 @@ class Api::VehicleController < ApplicationController
 
     private
     def vehicle_params
-        params.require(:vehicle).permit(:views_count)
+        params.require(:vehicle).permit(:VIN)
     end 
 end 
