@@ -517,7 +517,8 @@ var VehicleDetails = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (VehicleDetails.__proto__ || Object.getPrototypeOf(VehicleDetails)).call(this, props));
 
         _this.state = {
-            views: 0
+            views: 0,
+            vehicle: ""
         };
         return _this;
     }
@@ -527,21 +528,44 @@ var VehicleDetails = function (_React$Component) {
         value: function componentDidMount() {
             var _this2 = this;
 
-            console.log(this.props.location.state.vehicle.vin);
-            (0, _search_util.incrementViews)(this.props.location.state.vehicle.vin).then(function (res) {
-                console.log(res);
+            var rootstate = localStorage.getItem("vehicle");
+            if (!rootstate) {
+                localStorage.setItem("vehicle", JSON.stringify(this.props.location.state.vehicle));
+            }
+            this.setState({ vehicle: JSON.parse(rootstate) });
+            (0, _search_util.incrementViews)(JSON.parse(rootstate).vin).then(function (res) {
                 _this2.setState({ views: res.views_count });
             });
         }
     }, {
         key: 'render',
         value: function render() {
+            var vehicle = this.state.vehicle;
             return _react2.default.createElement(
                 'div',
                 null,
                 _react2.default.createElement(
-                    'h1',
+                    'div',
                     null,
+                    _react2.default.createElement('img', { src: vehicle.thumbnail_url, alt: 'Vehicle Image' }),
+                    _react2.default.createElement(
+                        'div',
+                        null,
+                        _react2.default.createElement(
+                            'h1',
+                            null,
+                            vehicle.year + ' ' + vehicle.make + ' ' + vehicle.model
+                        ),
+                        _react2.default.createElement(
+                            'h1',
+                            null,
+                            vehicle.price
+                        )
+                    )
+                ),
+                _react2.default.createElement(
+                    'h1',
+                    { className: 'views' },
                     'Views: ',
                     this.state.views
                 )
