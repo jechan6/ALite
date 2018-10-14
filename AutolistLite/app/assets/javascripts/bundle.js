@@ -233,7 +233,7 @@ var HomeIndex = function (_React$Component) {
             var _this2 = this;
 
             e.preventDefault();
-            (0, _search_util.searchApi)(e.target.price_min.value, e.target.price_max.value).then(function (res) {
+            (0, _search_util.searchApi)(e.target.price_min.value, e.target.price_max.value, e.target.make.value).then(function (res) {
                 _this2.props.history.push({
                     pathname: '/search_results',
                     state: { results: res.records }
@@ -258,6 +258,11 @@ var HomeIndex = function (_React$Component) {
                         'label',
                         null,
                         _react2.default.createElement('input', { name: 'price_max', placeholder: 'Enter Price Max...', type: 'text' })
+                    ),
+                    _react2.default.createElement(
+                        'label',
+                        null,
+                        _react2.default.createElement('input', { name: 'make', placeholder: 'Enter Make...', type: 'text' })
                     ),
                     _react2.default.createElement(
                         'button',
@@ -648,8 +653,8 @@ exports.default = VehicleDetails;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-var searchApi = exports.searchApi = function searchApi(min, max) {
-    var url = "https://qa878qmgjk.execute-api.us-east-1.amazonaws.com/dev?page=1&price_min=" + min + "&price_max=" + max;
+var searchApi = exports.searchApi = function searchApi(min, max, make) {
+    var url = "https://qa878qmgjk.execute-api.us-east-1.amazonaws.com/dev?page=1&price_min=" + min + "&price_max=" + max + "&make=" + make;
     return fetch(url, {
         method: "GET",
         headers: {

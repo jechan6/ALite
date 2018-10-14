@@ -10,7 +10,7 @@ class HomeIndex extends React.Component {
     }
     handleSubmit(e) {
         e.preventDefault();
-        searchApi(e.target.price_min.value, e.target.price_max.value)
+        searchApi(e.target.price_min.value, e.target.price_max.value, e.target.make.value)
             .then(res => {
                 this.props.history.push({
                     pathname: '/search_results',
@@ -26,6 +26,9 @@ class HomeIndex extends React.Component {
               </label>
               <label>
                 <input name="price_max" placeholder="Enter Price Max..." type="text" />
+              </label>
+              <label>
+                <input name="make" placeholder="Enter Make..." type="text"/>
               </label>
               <button>Search</button>
             </form>

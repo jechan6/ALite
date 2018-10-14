@@ -1,6 +1,6 @@
 
-export const searchApi = (min,max) => {
-    let url = `https://qa878qmgjk.execute-api.us-east-1.amazonaws.com/dev?page=1&price_min=${min}&price_max=${max}`;
+export const searchApi = (min,max,make) => {
+    let url = `https://qa878qmgjk.execute-api.us-east-1.amazonaws.com/dev?page=1&price_min=${min}&price_max=${max}&make=${make}`;
     return(
         fetch(url, {
             method: "GET",
