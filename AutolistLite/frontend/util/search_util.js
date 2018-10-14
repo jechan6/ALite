@@ -1,4 +1,3 @@
-import { resolve } from "url";
 
 export const searchApi = (min,max) => {
     let url = `https://qa878qmgjk.execute-api.us-east-1.amazonaws.com/dev?page=1&price_min=${min}&price_max=${max}`;
@@ -13,6 +12,7 @@ export const searchApi = (min,max) => {
 }
 export const createVehicle = (VIN) => {
     const vehicle = {VIN: VIN}
+    console.log(VIN);
     return(
         fetch('api/vehicle', {
             method: "POST",
@@ -23,21 +23,21 @@ export const createVehicle = (VIN) => {
             body: JSON.stringify(vehicle)
         })
         .then(res => res.json())
-        .then(res => console.log(res))
+
     )
 }
+
 export const incrementViews = (VIN) => {
     return(
         fetch(`api/vehicle/${VIN}`, {
             method: "GET",
         }).then(res => {
-            
             if(res.ok) {
                 return res.json();
             } else {
                 throw new Error("Not Found");
             }
-        }).then( res=>console.log(res))
+        })
         .catch(err => createVehicle(VIN))
     )
 }

@@ -1,16 +1,21 @@
 import React from 'react';
+import {withRouter} from 'react-router-dom';
 
 class SearchIndexItem extends React.Component {
     constructor(props) {
         super(props);
+        this.handleClick = this.handleClick.bind(this);
     }
     handleClick(e) {
         e.preventDefault();
-        console.log("HELLO");
+        
+        this.props.history.push({
+            pathname: `/search_results/${this.props.vehicle.vin}`,
+            state: { vehicle: this.props.vehicle }
+        });
     }
     render() {
         const vehicle = this.props.vehicle;
-        //year make model
         return(
             <div>
                 <div className="resultItem">    
@@ -25,4 +30,4 @@ class SearchIndexItem extends React.Component {
     }
 }
 
-export default SearchIndexItem;
+export default withRouter(SearchIndexItem);

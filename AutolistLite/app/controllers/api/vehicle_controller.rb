@@ -11,6 +11,7 @@ class Api::VehicleController < ApplicationController
     end 
 
     def show
+        puts params[:id]
         @vehicle = Vehicle.find_by(VIN: params[:id])
         if @vehicle
             @vehicle.increment!(:views_count)
@@ -32,6 +33,7 @@ class Api::VehicleController < ApplicationController
 
     private
     def vehicle_params
+        
         params.require(:vehicle).permit(:VIN)
     end 
 end 
