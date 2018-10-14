@@ -9,11 +9,22 @@ class VehicleDetails extends React.Component {
         }
     }
     componentDidMount() {
+        // const rootstate = localStorage.getItem('rootState');
+        // if (this.props.location.state && this.props.location.state.results) {
+        //     this.setState({ results: this.props.location.state.results });
+        //     localStorage.setItem("rootState", JSON.stringify(this.props.location.state.results));
+        // } else if (rootstate) {
+        //     this.setState({ results: JSON.parse(rootstate) });
+        // } 
         const rootstate = localStorage.getItem("vehicle");
-        if (!rootstate) {
+        if(this.props.location.state && this.props.location.state.vehicle) {
             localStorage.setItem("vehicle", JSON.stringify(this.props.location.state.vehicle));
+            this.setState({ vehicle: this.props.location.state.vehicle});
+        } else if (rootstate) {
+            this.setState({ results: JSON.parse(rootstate) });
+            // localStorage.setItem("vehicle", JSON.stringify(this.props.location.state.vehicle));
         }
-        this.setState({vehicle: JSON.parse(rootstate)});
+        // this.setState({vehicle: JSON.parse(rootstate)});
         incrementViews(JSON.parse(rootstate).vin).then(res => {
             this.setState({views: res.views_count});
         })

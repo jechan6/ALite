@@ -586,11 +586,22 @@ var VehicleDetails = function (_React$Component) {
         value: function componentDidMount() {
             var _this2 = this;
 
+            // const rootstate = localStorage.getItem('rootState');
+            // if (this.props.location.state && this.props.location.state.results) {
+            //     this.setState({ results: this.props.location.state.results });
+            //     localStorage.setItem("rootState", JSON.stringify(this.props.location.state.results));
+            // } else if (rootstate) {
+            //     this.setState({ results: JSON.parse(rootstate) });
+            // } 
             var rootstate = localStorage.getItem("vehicle");
-            if (!rootstate) {
+            if (this.props.location.state && this.props.location.state.vehicle) {
                 localStorage.setItem("vehicle", JSON.stringify(this.props.location.state.vehicle));
+                this.setState({ vehicle: this.props.location.state.vehicle });
+            } else if (rootstate) {
+                this.setState({ results: JSON.parse(rootstate) });
+                // localStorage.setItem("vehicle", JSON.stringify(this.props.location.state.vehicle));
             }
-            this.setState({ vehicle: JSON.parse(rootstate) });
+            // this.setState({vehicle: JSON.parse(rootstate)});
             (0, _search_util.incrementViews)(JSON.parse(rootstate).vin).then(function (res) {
                 _this2.setState({ views: res.views_count });
             });
