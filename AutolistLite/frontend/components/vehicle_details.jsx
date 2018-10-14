@@ -21,15 +21,15 @@ class VehicleDetails extends React.Component {
     render() {
         const vehicle = this.state.vehicle;
         return(
-            <div>
-                <div>
+            <div className="detail-container">
+                <div className="vehicle-detail">
                     <img src={vehicle.thumbnail_url} alt="Vehicle Image" />
-                    <div>
+                    <div className="detail-info">
                         <h1>{`${vehicle.year} ${vehicle.make} ${vehicle.model}`}</h1>
                         <h1>{vehicle.price}</h1>
+                        <h1 className="views">Views: {this.state.views}</h1>
                     </div>
                 </div>
-                <h1 className="views">Views: {this.state.views}</h1>
             </div>
         )
     }

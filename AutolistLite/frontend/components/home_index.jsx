@@ -19,21 +19,17 @@ class HomeIndex extends React.Component {
             });
     }
     render() {
-        return(
-            <div>
-                <form onSubmit={this.handleSubmit}>
-                    <label>
-                        Price Min:
-                        <input name="price_min" type="text"></input>
-                    </label>
-                    <label>
-                        Price Max:
-                        <input name="price_max" type="text"></input>
-                    </label>
-                    <button>Search</button>
-                </form>
-            </div>
-        )
+        return <div className="form-container">
+            <form className="search-form" onSubmit={this.handleSubmit}>
+              <label>
+                <input name="price_min" placeholder="Enter Price Min..." type="text" />
+              </label>
+              <label>
+                <input name="price_max" placeholder="Enter Price Max..." type="text" />
+              </label>
+              <button>Search</button>
+            </form>
+          </div>;
     }
 };
 

@@ -1,0 +1,104 @@
+.container {
+
+    .vehicleIndex {
+        width: 800px;
+        margin: 0 auto;
+        margin-top: 15px;
+        .resultItem {
+            height: 175px;
+            margin-bottom: 15px;    
+            background: white;
+            display: flex;
+            font-size: 12px;
+            
+            img {
+                width: 315px;
+                height: 100%;
+            }
+            .vehicle-info {
+                padding: 10px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+        }
+        .resultItem:hover {
+            cursor: pointer;
+        }
+    }
+}
+.detail-container {
+    width: 700px;
+    margin: 0 auto;
+    .vehicle-detail {
+        background-color: white;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        font-size: 12px;
+        .detail-info {
+            padding: 10px;
+        }
+    }
+}
+
+.nav-bar {
+    background: white;
+    height: 80px;
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    a {
+        text-decoration: none;
+    }
+    .brand{
+        
+        a{
+            font-size:20px;
+            color: red;
+        }
+        h1{
+            margin: 0;
+            padding-top: 15px;
+        }
+    }
+
+}
+.form-container {
+    background: rgba(255,255,255,0.8);
+    width: 600px;
+    height: 300px;
+    margin: 0 auto;
+    margin-top: 20px;
+    border-radius: 15px;
+    .search-form {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+       
+        label{
+            padding: 10px;
+           
+        }
+        button {
+            background: transparent;
+            border: 1px solid black;
+            width: 100px;
+            margin: 0 auto;
+            border-radius: 10px;
+            padding: 10px;
+            outline: 0;
+        }
+        button:hover {
+            cursor: pointer;
+            background-color: rgba(255,255,255,0.9);
+            transition: 1s all ease;
+        }
+    }
+}
+body {
+    background-color: #E7E8E9;
+    font-family: Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}

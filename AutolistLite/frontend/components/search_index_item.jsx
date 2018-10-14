@@ -16,17 +16,15 @@ class SearchIndexItem extends React.Component {
     }
     render() {
         const vehicle = this.props.vehicle;
-        return(
-            <div>
-                <div className="resultItem">    
-                    <img src={vehicle.thumbnail_url} alt="Vehicle Image"/>
-                    <div className="vehicle-info" onClick={this.handleClick}>
-                        <h1 className="vehicleModel">{`${vehicle.year} ${vehicle.make} ${vehicle.model}`}</h1>
-                        <h1>{vehicle.price}</h1>
-                    </div>
-                </div>
+        return <div>
+            <div className="resultItem" onClick={this.handleClick}>
+              <img src={vehicle.thumbnail_url} alt="Vehicle Image" />
+              <div className="vehicle-info">
+                <h1 className="vehicleModel">{`${vehicle.year} ${vehicle.make} ${vehicle.model}`}</h1>
+                <h1>{vehicle.price}</h1>
+              </div>
             </div>
-        )
+          </div>;
     }
 }
 

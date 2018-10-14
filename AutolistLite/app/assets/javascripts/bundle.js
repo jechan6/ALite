@@ -153,12 +153,17 @@ var _vehicle_details = __webpack_require__(/*! ./vehicle_details */ "./frontend/
 
 var _vehicle_details2 = _interopRequireDefault(_vehicle_details);
 
+var _nav_bar = __webpack_require__(/*! ./nav_bar */ "./frontend/components/nav_bar.jsx");
+
+var _nav_bar2 = _interopRequireDefault(_nav_bar);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var App = function App() {
     return _react2.default.createElement(
         'div',
         null,
+        _react2.default.createElement(_nav_bar2.default, null),
         _react2.default.createElement(
             _reactRouterDom.Switch,
             null,
@@ -240,21 +245,19 @@ var HomeIndex = function (_React$Component) {
         value: function render() {
             return _react2.default.createElement(
                 'div',
-                null,
+                { className: 'form-container' },
                 _react2.default.createElement(
                     'form',
-                    { onSubmit: this.handleSubmit },
+                    { className: 'search-form', onSubmit: this.handleSubmit },
                     _react2.default.createElement(
                         'label',
                         null,
-                        'Price Min:',
-                        _react2.default.createElement('input', { name: 'price_min', type: 'text' })
+                        _react2.default.createElement('input', { name: 'price_min', placeholder: 'Enter Price Min...', type: 'text' })
                     ),
                     _react2.default.createElement(
                         'label',
                         null,
-                        'Price Max:',
-                        _react2.default.createElement('input', { name: 'price_max', type: 'text' })
+                        _react2.default.createElement('input', { name: 'price_max', placeholder: 'Enter Price Max...', type: 'text' })
                     ),
                     _react2.default.createElement(
                         'button',
@@ -272,6 +275,51 @@ var HomeIndex = function (_React$Component) {
 ;
 
 exports.default = HomeIndex;
+
+/***/ }),
+
+/***/ "./frontend/components/nav_bar.jsx":
+/*!*****************************************!*\
+  !*** ./frontend/components/nav_bar.jsx ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var NavBar = function NavBar() {
+  return _react2.default.createElement(
+    'div',
+    { className: 'nav-bar' },
+    _react2.default.createElement(
+      'div',
+      { className: 'brand' },
+      _react2.default.createElement(
+        'a',
+        { href: '/' },
+        _react2.default.createElement(
+          'h1',
+          null,
+          'AUTOLIST'
+        )
+      )
+    )
+  );
+};
+exports.default = NavBar;
 
 /***/ }),
 
@@ -361,22 +409,29 @@ var SearchIndex = function (_React$Component) {
         key: 'componentDidMount',
         value: function componentDidMount() {
             var rootstate = localStorage.getItem('rootState');
-            if (rootstate) {
-                this.setState(JSON.parse(rootstate));
-            } else {
+            console.log(this.props.location.state);
+            if (this.props.location.state && this.props.location.state.results) {
                 this.setState({ results: this.props.location.state.results });
                 localStorage.setItem("rootState", JSON.stringify(this.props.location.state.results));
+            } else if (rootstate) {
+                console.log(JSON.parse(rootstate));
+                this.setState({ results: JSON.parse(rootstate) });
             }
         }
     }, {
         key: 'render',
         value: function render() {
+            if (this.state.results.length <= 0) return null;
             return _react2.default.createElement(
                 'div',
-                null,
-                this.state.results.map(function (data, idx) {
-                    return _react2.default.createElement(_search_index_item2.default, { vehicle: data, key: idx });
-                })
+                { className: 'container' },
+                _react2.default.createElement(
+                    'div',
+                    { className: 'vehicleIndex' },
+                    this.state.results.map(function (data, idx) {
+                        return _react2.default.createElement(_search_index_item2.default, { vehicle: data, key: idx });
+                    })
+                )
             );
         }
     }]);
@@ -450,11 +505,11 @@ var SearchIndexItem = function (_React$Component) {
                 null,
                 _react2.default.createElement(
                     'div',
-                    { className: 'resultItem' },
+                    { className: 'resultItem', onClick: this.handleClick },
                     _react2.default.createElement('img', { src: vehicle.thumbnail_url, alt: 'Vehicle Image' }),
                     _react2.default.createElement(
                         'div',
-                        { className: 'vehicle-info', onClick: this.handleClick },
+                        { className: 'vehicle-info' },
                         _react2.default.createElement(
                             'h1',
                             { className: 'vehicleModel' },
@@ -543,14 +598,14 @@ var VehicleDetails = function (_React$Component) {
             var vehicle = this.state.vehicle;
             return _react2.default.createElement(
                 'div',
-                null,
+                { className: 'detail-container' },
                 _react2.default.createElement(
                     'div',
-                    null,
+                    { className: 'vehicle-detail' },
                     _react2.default.createElement('img', { src: vehicle.thumbnail_url, alt: 'Vehicle Image' }),
                     _react2.default.createElement(
                         'div',
-                        null,
+                        { className: 'detail-info' },
                         _react2.default.createElement(
                             'h1',
                             null,
@@ -560,14 +615,14 @@ var VehicleDetails = function (_React$Component) {
                             'h1',
                             null,
                             vehicle.price
+                        ),
+                        _react2.default.createElement(
+                            'h1',
+                            { className: 'views' },
+                            'Views: ',
+                            this.state.views
                         )
                     )
-                ),
-                _react2.default.createElement(
-                    'h1',
-                    { className: 'views' },
-                    'Views: ',
-                    this.state.views
                 )
             );
         }

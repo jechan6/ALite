@@ -7,20 +7,25 @@ class SearchIndex extends React.Component {
     }
     componentDidMount() {
         const rootstate = localStorage.getItem('rootState');
-        if(rootstate) {
-            this.setState(JSON.parse(rootstate));
-        } else {
-            this.setState({ results: this.props.location.state.results})
+        console.log(this.props.location.state);
+        if (this.props.location.state && this.props.location.state.results) {
+            this.setState({ results: this.props.location.state.results });
             localStorage.setItem("rootState", JSON.stringify(this.props.location.state.results));
-        }
+        } else if(rootstate) {
+            console.log(JSON.parse(rootstate));
+            this.setState({results: JSON.parse(rootstate)});
+        } 
     }
 
     render() {
+        if(this.state.results.length <= 0) return null;
         return(
-            <div>
-                {this.state.results.map((data, idx) => (
-                    <SearchIndexItem vehicle={data} key={idx}/>
-                ))}
+            <div className="container">
+                <div className="vehicleIndex">
+                    {this.state.results.map((data, idx) => (
+                        <SearchIndexItem vehicle={data} key={idx}/>
+                    ))}
+                </div>
             </div>
         )
     }

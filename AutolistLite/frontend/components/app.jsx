@@ -3,8 +3,10 @@ import {Route, Switch} from 'react-router-dom';
 import HomeIndex from './home_index';
 import SearchIndex from './search_index';
 import VehicleDetails from './vehicle_details';
+import NavBar from './nav_bar';
 const App = () => (
     <div>
+        <NavBar />
         <Switch>
             <Route exact path="/" component={HomeIndex}></Route>
             <Route path="/home" component={HomeIndex}></Route>
