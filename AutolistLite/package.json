@@ -1,16 +1,28 @@
 {
   "name": "AutolistLite",
-  "private": true,
-  "dependencies": {},
-  "description": "This README would normally document whatever steps are necessary to get the application up and running.",
   "version": "1.0.0",
-  "main": "index.js",
+  "description": "This README would normally document whatever steps are necessary to get the application up and running.",
+  "main": "webpack.config.js",
   "directories": {
     "lib": "lib",
     "test": "test"
   },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
+    "react-router-dom": "^4.3.1",
+    "webpack": "^4.16.5",
+    "webpack-cli": "^3.1.0"
+  },
+  "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack --watch --mode=development"
   },
   "keywords": [],
   "author": "",

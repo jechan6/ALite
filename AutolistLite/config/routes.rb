@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   namespace :api, defaults: {format: :json} do
     resources :vehicle, only: [:create, :show, :update]
   end
+  root "static_pages#root"
 end
