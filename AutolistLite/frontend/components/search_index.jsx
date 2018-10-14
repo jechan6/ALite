@@ -7,12 +7,10 @@ class SearchIndex extends React.Component {
     }
     componentDidMount() {
         const rootstate = localStorage.getItem('rootState');
-        console.log(this.props.location.state);
         if (this.props.location.state && this.props.location.state.results) {
             this.setState({ results: this.props.location.state.results });
             localStorage.setItem("rootState", JSON.stringify(this.props.location.state.results));
         } else if(rootstate) {
-            console.log(JSON.parse(rootstate));
             this.setState({results: JSON.parse(rootstate)});
         } 
     }
